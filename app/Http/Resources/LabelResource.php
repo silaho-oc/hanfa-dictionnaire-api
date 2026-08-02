@@ -14,7 +14,8 @@ class LabelResource extends JsonResource
             : null;
 
         return [
-            'key' => $this->uuid,
+            'uuid' => $this->uuid,
+            'key' => $this->key,
             'code' => $translation?->code,
             'name' => $translation?->name,
         ];
