@@ -7,6 +7,7 @@ use App\Models\Character;
 use App\Models\Entry;
 use App\Models\EntryTranslation;
 use App\Models\ExampleTranslation;
+use Carbon\Carbon;
 
 class MetadataController extends Controller
 {
@@ -17,6 +18,10 @@ class MetadataController extends Controller
 
         return response()->json([
             'dictionary_version' => config('dictionary.version'),
+            'dictionary_version_name' => config('dictionary.version_name'),
+            'dictionary_updated_at' => Carbon::parse(
+                Entry::max('updated_at')
+            )->locale('fr')->translatedFormat('j F Y'),
             'about' => config('hanfa.about'),
             'terms' => config('hanfa.terms'),
             'policies' => config('hanfa.policies'),
@@ -24,15 +29,11 @@ class MetadataController extends Controller
             'dictionary_statistics' => [
                 'characters' => Character::count(),
                 'entries' => Entry::count(),
-
                 'french_translations' => EntryTranslation::whereHas(
-                    'language',
-                    fn ($query) => $query->where('code', $languageCode)
+                    'language', fn ($query) => $query->where('code', $languageCode)
                 )->count(),
-
                 'french_example_translations' => ExampleTranslation::whereHas(
-                    'language',
-                    fn ($query) => $query->where('code', $languageCode)
+                    'language', fn ($query) => $query->where('code', $languageCode)
                 )->count(),
             ],
         ]);
