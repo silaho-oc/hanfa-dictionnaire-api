@@ -14,4 +14,10 @@ class Character extends Model
     {
         return $this->hasMany(Entry::class);
     }
+
+    // CHARACTER HAS MANY PRONUNCIATIONS
+    public function pronunciations()
+    {
+        return $this->hasMany(CharacterPronunciation::class)->orderBy('position');
+    }
 }

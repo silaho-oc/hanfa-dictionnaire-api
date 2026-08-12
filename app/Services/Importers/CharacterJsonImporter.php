@@ -29,7 +29,7 @@ class CharacterJsonImporter
 
         DB::transaction(function () use ($characters) {
             foreach ($characters as $item) {
-                Character::updateOrCreate(
+                $character = Character::updateOrCreate(
                     [
                         'uuid' => $item['uuid'],
                     ],
@@ -45,6 +45,20 @@ class CharacterJsonImporter
                         'completed_at' => $item['completed_at'] ?? null,
                     ]
                 );
+
+                foreach ($item['pronunciations'] ?? [] as $pronunciation) {
+                    $character->pronunciations()->updateOrCreate(
+                        [
+                            'uuid' => $pronunciation['uuid'],
+                        ],
+                        [
+                            'pinyin' => $pronunciation['pinyin'],
+                            'alpha' => $pronunciation['alpha'],
+                            'position' => $pronunciation['position'],
+                            'is_primary' => $pronunciation['is_primary'] ?? false,
+                        ]
+                    );
+                }
             }
         });
     }
