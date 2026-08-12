@@ -23,6 +23,8 @@ class CharacterResource extends JsonResource
             'standard_level' => $this->standard_level,
             'standard_order' => $this->standard_order,
             'stroke_count' => $this->stroke_count,
+            'status' => $this->status,
+            'completed_at' => $this->completed_at,
             'pronunciations' => CharacterPronunciationResource::collection(
                 $this->whenLoaded('pronunciations')
             ),
