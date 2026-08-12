@@ -11,20 +11,30 @@ class CharacterJsonImporter
     public function import(string $path): void
     {
         if (! file_exists($path)) {
-            throw new RuntimeException("Characters JSON file not found: {$path}");
+            throw new RuntimeException(
+                "Characters JSON file not found: {$path}"
+            );
         }
 
-        $characters = json_decode(file_get_contents($path), true);
+        $characters = json_decode(
+            file_get_contents($path),
+            true
+        );
 
-        if (!is_array($characters)) {
-            throw new RuntimeException("Invalid characters JSON structure.");
+        if (! is_array($characters)) {
+            throw new RuntimeException(
+                "Invalid characters JSON structure."
+            );
         }
 
         DB::transaction(function () use ($characters) {
             foreach ($characters as $item) {
                 Character::updateOrCreate(
-                    ['simp' => $item['simp']],
                     [
+                        'uuid' => $item['uuid'],
+                    ],
+                    [
+                        'simp' => $item['simp'],
                         'trad' => $item['trad'],
                         'pinyin' => $item['pinyin'],
                         'alpha' => $item['alpha'],

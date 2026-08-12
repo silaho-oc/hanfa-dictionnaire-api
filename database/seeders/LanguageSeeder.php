@@ -19,3 +19,33 @@ class LanguageSeeder extends Seeder
         );
     }
 }
+
+
+// $languages = [
+//     [
+//         'code' => 'fr',
+//         'name' => 'French',
+//         'native_name' => 'Français',
+//     ],
+//     [
+//         'code' => 'en',
+//         'name' => 'English',
+//         'native_name' => 'English',
+//     ],
+//     [
+//         'code' => 'zh',
+//         'name' => 'Chinese',
+//         'native_name' => '中文',
+//     ],
+// ];
+
+// foreach ($languages as $language) {
+//     Language::updateOrCreate(
+//         ['code' => $language['code']],
+//         [
+//             'name' => $language['name'],
+//             'native_name' => $language['native_name'],
+//             'is_active' => true,
+//         ]
+//     );
+// }
