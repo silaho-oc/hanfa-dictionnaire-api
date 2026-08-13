@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Public;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\CharacterResource;
 use App\Http\Resources\EntriesResource;
 use App\Models\Character;
@@ -22,6 +23,7 @@ class CharacterController extends Controller
     {
         $characters = Character::query()
             ->with('pronunciations')
+            ->withCount('entries')
             ->orderBy('standard_level')
             ->orderBy('stroke_count')
             ->orderBy('standard_order')

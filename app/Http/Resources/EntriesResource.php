@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Log;
 
 class EntriesResource extends JsonResource
 {
@@ -11,11 +12,11 @@ class EntriesResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
+            'character_uuid' => $this->character?->uuid,
             'trad' => $this->trad,
             'simp' => $this->simp,
             'pinyin' => $this->pinyin,
             'alpha' => $this->alpha,
-
             'labels' => LabelResource::collection(
                 $this->whenLoaded('resolvedLabels')
             ),

@@ -2,7 +2,7 @@
 
 // use App\Http\Controllers\Public\CharacterController;
 
-use App\Http\Controllers\CharacterController;
+use App\Http\Controllers\Public\CharacterController;
 use App\Http\Controllers\Public\EntryController;
 use App\Http\Controllers\Public\MetadataController;
 use Illuminate\Support\Facades\Route;
