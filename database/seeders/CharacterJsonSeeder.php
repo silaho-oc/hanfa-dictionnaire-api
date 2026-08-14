@@ -12,7 +12,7 @@ class CharacterJsonSeeder extends Seeder
     public function run(): void
     {
         $directory = storage_path(
-            'app/hanfa/characters'
+            'app/hanfa/characters/level-1'
         );
 
         if (! File::isDirectory($directory)) {
