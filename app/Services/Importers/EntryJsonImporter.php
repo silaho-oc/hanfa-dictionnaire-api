@@ -6,6 +6,7 @@ use App\Models\Character;
 use App\Models\Entry;
 use App\Models\Language;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use RuntimeException;
 
 class EntryJsonImporter
@@ -42,6 +43,25 @@ class EntryJsonImporter
         $mainCharacter = mb_substr($item['simp'], 0, 1);
 
         $character = Character::where('simp', $mainCharacter)->firstOrFail();
+        
+        /**
+         * FOR DEBUGGING
+         */
+
+        // $character = Character::where('simp', $mainCharacter)->first();
+        // if (! $character) {
+        //     Log::error('Character not found', [
+        //         'entry_uuid' => $item['uuid'] ?? null,
+        //         'entry_simp' => $item['simp'] ?? null,
+        //         'main_character' => $mainCharacter,
+        //     ]);
+
+        //     throw new RuntimeException(
+        //         "Character '{$mainCharacter}' not found for entry '{$item['simp']}'."
+        //     );
+        // }
+        // return;
+
 
         $entry = Entry::updateOrCreate(
             [

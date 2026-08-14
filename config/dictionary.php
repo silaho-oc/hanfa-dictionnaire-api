@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'version' => 2,
-    'version_name' => '2026.08.2',
+    'version' => 5,
+    'version_name' => '2026.08.5',
 ];
